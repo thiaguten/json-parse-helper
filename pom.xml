@@ -6,37 +6,46 @@
 
     <groupId>br.com.thiaguten.json</groupId>
     <artifactId>json-parse-helper</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
 
     <name>JsonParseHelper</name>
-    <description>Helper class with parse feature for converting MongoDB BSON strict/shell mode into 'standard' JSON format</description>
+    <description>Helper MongoDB BSON strict/shell mode to 'standard' JSON format</description>
+    <url>https://github.com/thiaguten/simple-dao</url>
+
+    <inceptionYear>2015</inceptionYear>
+
+    <organization>
+        <name>www.thiaguten.com.br</name>
+        <url>https://github.com/thiaguten</url>
+    </organization>
+
+    <licenses>
+        <license>
+            <name>BSD 3-Clause License</name>
+            <url>https://opensource.org/licenses/BSD-3-Clause</url>
+        </license>
+    </licenses>
 
     <developers>
         <developer>
-            <id>thiaguten</id>
             <name>Thiago Gutenberg Carvalho da Costa</name>
             <email>thiaguten@gmail.com</email>
-            <roles>
-                <role>developer</role>
-            </roles>
             <timezone>-3</timezone>
         </developer>
     </developers>
 
-    <licenses>
-        <license>
-            <name>The Apache Software License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-            <distribution>repo</distribution>
-            <comments>A business-friendly OSS license</comments>
-        </license>
-    </licenses>
+    <scm>
+        <connection>scm:git:git@github.com:thiaguten/json-parse-helper.git</connection>
+        <developerConnection>scm:git@github.com:thiaguten/json-parse-helper.git</developerConnection>
+        <url>git@github.com:thiaguten/json-parse-helper.git</url>
+        <tag>HEAD</tag>
+    </scm>
 
     <properties>
-        <java.version>1.8</java.version>
+        <java.version>1.6</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <bson.version>3.1.1</bson.version>
+        <bson.version>3.2.0</bson.version>
         <junit.version>4.12</junit.version>
     </properties>
 
@@ -49,6 +58,39 @@
                     <source>${java.version}</source>
                     <target>${java.version}</target>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <version>1.8</version>
+                <configuration>
+                    <verbose>false</verbose>
+                    <addSvnKeyWords>true</addSvnKeyWords>
+                    <organizationName>Thiago Gutenberg Carvalho da Costa.</organizationName>
+                    <descriptionTemplate>${project.basedir}/src/license/header.ftl</descriptionTemplate>
+                    <addJavaLicenseAfterPackage>false</addJavaLicenseAfterPackage>
+                    <licenseName>bsd_3</licenseName>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>update-file-header</id>
+                        <goals>
+                            <goal>update-file-header</goal>
+                        </goals>
+                        <phase>process-sources</phase>
+                        <configuration>
+                            <excludes>
+                                <exclude>**/*.xml</exclude>
+                                <exclude>**/*.xsd</exclude>
+                                <exclude>**/*.jsp</exclude>
+                                <exclude>**/*.tag</exclude>
+                                <exclude>**/*.js</exclude>
+                                <exclude>**/*.properties</exclude>
+                                <exclude>**/*.css</exclude>
+                            </excludes>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

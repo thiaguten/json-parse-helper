@@ -1,8 +1,10 @@
-<h1>JsonParseHelper</h1><br>
+# JsonParseHelper
+
+[![Build Status](https://travis-ci.org/thiaguten/json-parse-helper.svg)](https://travis-ci.org/thiaguten/json-parse-helper)
 
 JsonParseHelper is a utility class with parse feature for converting MongoDB BSON strict/shell mode into 'standard' JSON format useful for instance for REST services with MongoDB.
 
-----------------------------------------------------
+## Examples
 
 BsonDocument or Document Shell/Strict mode to "Standard" JSON format:
 
