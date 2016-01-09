@@ -67,7 +67,7 @@ import java.util.regex.Pattern;
 
 /**
  * This class helps with some parse feature for converting MongoDB BSON strict/shell mode into 'standard' JSON format.
- *
+ * <p>
  * <ul>
  * <li>
  * <pre>
@@ -107,6 +107,7 @@ public final class JsonParseHelper {
     private static final String JSON_OBJECT_END_TOKEN = " }";
     private static final String JSON_ARRAY_START_TOKEN = "[ ";
     private static final String JSON_ARRAY_END_TOKEN = " ]";
+    private static final String NULL = null;
 
     private JsonParseHelper() {
         throw new AssertionError();
@@ -130,7 +131,7 @@ public final class JsonParseHelper {
                 return json;
             }
         }
-        return json;
+        return NULL;
     }
 
     /**
@@ -205,8 +206,7 @@ public final class JsonParseHelper {
                     builder.append(DOUBLE_QUOTES).append(consolidate).append(DOUBLE_QUOTES);
                     break;
                 case NULL:
-                    String nulll = null;
-                    builder.append(nulll);
+                    builder.append(NULL);
                     break;
                 case OBJECT_ID:
                     builder.append(DOUBLE_QUOTES).append(bsonValue.asObjectId().getValue().toHexString()).append(DOUBLE_QUOTES);
@@ -277,7 +277,7 @@ public final class JsonParseHelper {
                 builder.append(value);
             }
             if (value == null) {
-                builder.append(value);
+                builder.append(NULL);
             }
         }
     }
@@ -300,14 +300,6 @@ public final class JsonParseHelper {
             this.flagAsString = flagAsString;
         }
 
-        public int getFlag() {
-            return flag;
-        }
-
-        public String getFlagAsString() {
-            return flagAsString;
-        }
-
         public static PatternFlag of(int flag) {
             for (PatternFlag patternFlag : values()) {
                 if (patternFlag.getFlag() == flag) {
@@ -315,6 +307,14 @@ public final class JsonParseHelper {
                 }
             }
             throw new RuntimeException("pattern flag not suported");
+        }
+
+        public int getFlag() {
+            return flag;
+        }
+
+        public String getFlagAsString() {
+            return flagAsString;
         }
     }
 
