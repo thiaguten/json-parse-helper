@@ -35,7 +35,6 @@ import org.bson.*;
 import org.bson.json.JsonMode;
 import org.bson.json.JsonWriterSettings;
 import org.bson.types.ObjectId;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.Date;
@@ -47,25 +46,17 @@ import static org.junit.Assert.assertNotNull;
 
 public class JsonParseHelperTest {
 
-    private static Document document;
-    private static BsonDocument bsonDocument;
+    private static final Document document = new Document()
+            .append("_id", new ObjectId("5662e5798172910f5a925a43"))
+            .append("date", new Date(1449321983184L))
+            .append("pattern", Pattern.compile("\\d", Pattern.CASE_INSENSITIVE))
+            .append("long", Long.MAX_VALUE);
 
-    @BeforeClass
-    public static void setUp() {
-        bsonDocument = new BsonDocument()
-                .append("_id", new BsonObjectId(new ObjectId("5662e5798172910f5a925a43")))
-                .append("date", new BsonDateTime(1449321983184L))
-                .append("pattern", new BsonRegularExpression("\\d", "i"))
-                .append("long", new BsonInt64(Long.MAX_VALUE))
-        ;
-
-        document = new Document()
-                .append("_id", new ObjectId("5662e5798172910f5a925a43"))
-                .append("date", new Date(1449321983184L))
-                .append("pattern", Pattern.compile("\\d", Pattern.CASE_INSENSITIVE))
-                .append("long", Long.MAX_VALUE)
-        ;
-    }
+    private static final BsonDocument bsonDocument = new BsonDocument()
+            .append("_id", new BsonObjectId(new ObjectId("5662e5798172910f5a925a43")))
+            .append("date", new BsonDateTime(1449321983184L))
+            .append("pattern", new BsonRegularExpression("\\d", "i"))
+            .append("long", new BsonInt64(Long.MAX_VALUE));
 
     @Test
     public void bsonArrayTest() {
