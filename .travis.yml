@@ -3,6 +3,9 @@ sudo: false
 cache:
   directories:
     - $HOME/.m2/repository
+branches:
+    except:
+        - gh-pages
 jdk:
   - oraclejdk8
 install: /bin/true
@@ -11,3 +14,5 @@ script:
   - mvn test
 notifications:
   email: false
+after_success:
+- mvn clean test jacoco:report coveralls:report

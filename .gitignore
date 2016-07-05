@@ -1,5 +1,4 @@
 ####### Java #######
-
 *.class
 
 # Mobile Tools for Java (J2ME)
@@ -10,16 +9,11 @@
 *.war
 *.ear
 
-# Virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
-####### Spring Tool Suite #######
-.springBeans
-
 ####### Eclipse #######
-*.pydevproject
 .metadata
-.gradle
 bin/
 tmp/
 *.tmp
@@ -29,6 +23,7 @@ tmp/
 local.properties
 .settings/
 .loadpath
+.recommenders
 
 # Eclipse Core
 .project
@@ -39,7 +34,10 @@ local.properties
 # Locally stored "Eclipse launch configurations"
 *.launch
 
-# CDT-specific
+# PyDev specific (Python IDE for Eclipse)
+*.pydevproject
+
+# CDT-specific (C/C++ Development Tooling)
 .cproject
 
 # JDT-specific (Eclipse Java Development Tools)
@@ -48,44 +46,55 @@ local.properties
 # Java annotation processor (APT)
 .factorypath
 
-# PDT-specific
+# PDT-specific (PHP Development Tools)
 .buildpath
 
 # sbteclipse plugin
 .target
 
+# Tern plugin
+.tern-project
+
 # TeXlipse plugin
 .texlipse
 
-####### JetBrains #######
-# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion
+# STS (Spring Tool Suite)
+.springBeans
 
-*.iml
+# Code Recommenders
+.recommenders/
+
+####### JetBrains #######
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and Webstorm
+# Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
 ## Directory-based project format:
 .idea/
-# if you remove the above rule, at least ignore the following:
 
 # User-specific stuff:
-# .idea/workspace.xml
-# .idea/tasks.xml
-# .idea/dictionaries
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/dictionaries
+.idea/vcs.xml
+.idea/jsLibraryMappings.xml
 
 # Sensitive or high-churn files:
-# .idea/dataSources.ids
-# .idea/dataSources.xml
-# .idea/sqlDataSources.xml
-# .idea/dynamic.xml
-# .idea/uiDesigner.xml
+.idea/dataSources.ids
+.idea/dataSources.xml
+.idea/dataSources.local.xml
+.idea/sqlDataSources.xml
+.idea/dynamic.xml
+.idea/uiDesigner.xml
 
 # Gradle:
-# .idea/gradle.xml
-# .idea/libraries
+.idea/gradle.xml
+.idea/libraries
 
 # Mongo Explorer plugin:
-# .idea/mongoSettings.xml
+.idea/mongoSettings.xml
 
 ## File-based project format:
+*.iml
 *.ipr
 *.iws
 
@@ -104,6 +113,7 @@ atlassian-ide-plugin.xml
 com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
+fabric.properties
 
 ####### Netbeans #######
 nbproject/private/
@@ -112,18 +122,23 @@ nbbuild/
 dist/
 nbdist/
 nbactions.xml
-nb-configuration.xml
 .nb-gradle/
 
 ####### Gradle #######
 .gradle
-gradle.properties
-build/
-*/build
+/build/
+
 # Ignore Gradle GUI config
 gradle-app.setting
+
 # Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
 !gradle-wrapper.jar
+
+# Cache of project
+.gradletasknamecache
+
+# # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
+# gradle/wrapper/gradle-wrapper.properties
 
 ####### Maven #######
 target/
@@ -137,6 +152,7 @@ buildNumber.properties
 .mvn/timing.properties
 
 ####### Windows #######
+# Windows image file caches
 Thumbs.db
 ehthumbs.db
 
@@ -163,6 +179,7 @@ $RECYCLE.BIN/
 # Icon must end with two \r
 Icon
 
+
 # Thumbnails
 ._*
 
@@ -183,6 +200,9 @@ Temporary Items
 
 ####### Linux #######
 *~
+
+# temporary files which can be created if a process still has a handle open of a deleted file
+.fuse_hidden*
 
 # KDE directory preferences
 .directory

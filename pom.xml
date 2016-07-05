@@ -12,25 +12,32 @@
     <description>Helper MongoDB BSON strict/shell mode to 'standard' JSON format</description>
     <url>https://github.com/thiaguten/simple-dao</url>
 
-    <inceptionYear>2015</inceptionYear>
-
-    <organization>
-        <name>www.thiaguten.com.br</name>
-        <url>https://github.com/thiaguten</url>
-    </organization>
+    <inceptionYear>2016</inceptionYear>
 
     <licenses>
         <license>
-            <name>BSD 3-Clause License</name>
-            <url>https://opensource.org/licenses/BSD-3-Clause</url>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
         </license>
     </licenses>
 
+    <organization>
+        <name>Thiago Gutenberg Carvalho da Costa</name>
+        <url>http://www.thiaguten.com.br</url>
+    </organization>
+
     <developers>
         <developer>
+            <id>thiaguten</id>
             <name>Thiago Gutenberg Carvalho da Costa</name>
             <email>thiaguten@gmail.com</email>
-            <timezone>-3</timezone>
+            <url>http://www.thiaguten.com.br</url>
+            <roles>
+                <role>architect</role>
+                <role>developer</role>
+            </roles>
+            <timezone>America/Sao_Paulo</timezone>
         </developer>
     </developers>
 
@@ -41,56 +48,100 @@
         <tag>HEAD</tag>
     </scm>
 
-    <properties>
-        <java.version>1.8</java.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <bson.version>3.2.0</bson.version>
-        <junit.version>4.12</junit.version>
-    </properties>
-
     <build>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.3</version>
+                <version>3.5.1</version>
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>license-maven-plugin</artifactId>
-                <version>1.8</version>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.4</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.10.3</version>
                 <configuration>
-                    <verbose>false</verbose>
-                    <addSvnKeyWords>true</addSvnKeyWords>
-                    <organizationName>Thiago Gutenberg Carvalho da Costa.</organizationName>
-                    <descriptionTemplate>${project.basedir}/src/license/header.ftl</descriptionTemplate>
-                    <addJavaLicenseAfterPackage>false</addJavaLicenseAfterPackage>
-                    <licenseName>bsd_3</licenseName>
+                    <show>public</show>
+                    <maxmemory>1024m</maxmemory>
                 </configuration>
                 <executions>
                     <execution>
-                        <id>update-file-header</id>
+                        <id>attach-javadocs</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <version>1.9</version>
+                <configuration>
+                    <verbose>false</verbose>
+                    <addSvnKeyWords>false</addSvnKeyWords>
+                    <addJavaLicenseAfterPackage>false</addJavaLicenseAfterPackage>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>first</id>
                         <goals>
                             <goal>update-file-header</goal>
                         </goals>
                         <phase>process-sources</phase>
                         <configuration>
+                            <licenseName>apache_v2</licenseName>
                             <excludes>
                                 <exclude>**/*.xml</exclude>
                                 <exclude>**/*.xsd</exclude>
-                                <exclude>**/*.jsp</exclude>
-                                <exclude>**/*.tag</exclude>
-                                <exclude>**/*.js</exclude>
-                                <exclude>**/*.properties</exclude>
-                                <exclude>**/*.css</exclude>
                             </excludes>
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.7.7.201606060606</version>
+                <configuration>
+                    <destFile>${project.reporting.outputDirectory}/jacoco-unit.exec</destFile>
+                    <dataFile>${project.reporting.outputDirectory}/jacoco-unit.exec</dataFile>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>jacoco-initialize</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>jacoco-site</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.eluder.coveralls</groupId>
+                <artifactId>coveralls-maven-plugin</artifactId>
+                <version>4.2.0</version>
             </plugin>
         </plugins>
     </build>
@@ -108,5 +159,13 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <bson.version>3.2.2</bson.version>
+        <junit.version>4.12</junit.version>
+    </properties>
 
 </project>
