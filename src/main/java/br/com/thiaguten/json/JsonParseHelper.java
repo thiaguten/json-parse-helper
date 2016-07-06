@@ -30,6 +30,7 @@ import org.bson.types.ObjectId;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -80,6 +81,7 @@ public final class JsonParseHelper {
     public static final String JSON_ARRAY_END_TOKEN = "]";
     public static final String NULL = null;
     public static final int INVALID_PATTERN_FLAG = 0;
+    public static final ZoneId UTC_DATE_TIME_ZONE = ZoneOffset.UTC;
 
     private JsonParseHelper() {
         throw new AssertionError();
@@ -185,7 +187,9 @@ public final class JsonParseHelper {
                     builder.append(DOUBLE_QUOTES).append(bsonValue.asObjectId().getValue().toHexString()).append(DOUBLE_QUOTES);
                     break;
                 case DATE_TIME:
-                    builder.append(DOUBLE_QUOTES).append(LocalDateTime.ofInstant(Instant.ofEpochMilli(bsonValue.asDateTime().getValue()), ZoneId.systemDefault())).append(DOUBLE_QUOTES);
+                    Instant instant = Instant.ofEpochMilli(bsonValue.asDateTime().getValue());
+                    LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, UTC_DATE_TIME_ZONE);
+                    builder.append(DOUBLE_QUOTES).append(localDateTime).append(DOUBLE_QUOTES);
                     break;
                 case STRING:
                     builder.append(DOUBLE_QUOTES).append(bsonValue.asString().getValue()).append(DOUBLE_QUOTES);
@@ -223,7 +227,7 @@ public final class JsonParseHelper {
             }
             if (value instanceof Date) {
                 Date date = (Date) value;
-                builder.append(DOUBLE_QUOTES).append(LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault())).append(DOUBLE_QUOTES);
+                builder.append(DOUBLE_QUOTES).append(LocalDateTime.ofInstant(date.toInstant(), UTC_DATE_TIME_ZONE)).append(DOUBLE_QUOTES);
             }
             if (value instanceof String) {
                 builder.append(DOUBLE_QUOTES).append(value).append(DOUBLE_QUOTES);

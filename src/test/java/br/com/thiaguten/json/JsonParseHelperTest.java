@@ -49,7 +49,7 @@ public class JsonParseHelperTest {
             .append("string", "thiago")
             .append("boolean", true)
             .append("doc", new Document("key", "value"))
-            .append("list", Arrays.asList("value"))
+            .append("list", Collections.singletonList("value"))
             .append("map", Collections.singletonMap("key", "value"));
 
     private static final BsonDocument bsonDocument = new BsonDocument()
@@ -63,8 +63,8 @@ public class JsonParseHelperTest {
             .append("string", new BsonString("thiago"))
             .append("boolean", new BsonBoolean(true))
             .append("doc", new BsonDocument("key", new BsonString("value")))
-            .append("list", new BsonArray(Arrays.asList(new BsonString("value"))))
-            .append("map", new BsonDocument(Arrays.asList(new BsonElement("key", new BsonString("value")))));
+            .append("list", new BsonArray(Collections.singletonList(new BsonString("value"))))
+            .append("map", new BsonDocument(Collections.singletonList(new BsonElement("key", new BsonString("value")))));
 
     @Test
     public void constantsTest() {
@@ -116,7 +116,7 @@ public class JsonParseHelperTest {
         assertEquals(empty, JsonParseHelper.parse(Collections.emptyMap()));
         assertEquals(notEmpty, parse(Collections.singletonMap("key", "value")));
         assertEquals(notEmpty, parse(new Document("key", "value")));
-        assertEquals(notEmpty, parse(new BsonDocument(Arrays.asList(new BsonElement("key", new BsonString("value"))))));
+        assertEquals(notEmpty, parse(new BsonDocument(Collections.singletonList(new BsonElement("key", new BsonString("value"))))));
     }
 
     @Test
@@ -125,8 +125,8 @@ public class JsonParseHelperTest {
         String notEmpty = "[\"value\"]";
         assertEquals(empty, JsonParseHelper.parse((List) null));
         assertEquals(empty, parse(Collections.emptyList()));
-        assertEquals(notEmpty, parse(Arrays.asList("value")));
-        assertEquals(notEmpty, parse(new BsonArray(Arrays.asList(new BsonString("value")))));
+        assertEquals(notEmpty, parse(Collections.singletonList("value")));
+        assertEquals(notEmpty, parse(new BsonArray(Collections.singletonList(new BsonString("value")))));
     }
 
     @Test
@@ -152,37 +152,37 @@ public class JsonParseHelperTest {
     @Test
     public void bsonDocumentTest() {
         assertNotNull(bsonDocument);
-        assertEquals("{\"_id\":\"5662e5798172910f5a925a43\", \"date\":\"2015-12-05T11:26:23.184\", \"pattern\":\"\\\\d/i\", \"pattern2\":\"\\\\s\", \"long\":9223372036854775807, \"null\":null, \"double\":1.0, \"string\":\"thiago\", \"boolean\":true, \"doc\":{\"key\":\"value\"}, \"list\":[\"value\"], \"map\":{\"key\":\"value\"}}", parse(bsonDocument));
+        assertEquals("{\"_id\":\"5662e5798172910f5a925a43\", \"date\":\"2015-12-05T13:26:23.184\", \"pattern\":\"\\\\d/i\", \"pattern2\":\"\\\\s\", \"long\":9223372036854775807, \"null\":null, \"double\":1.0, \"string\":\"thiago\", \"boolean\":true, \"doc\":{\"key\":\"value\"}, \"list\":[\"value\"], \"map\":{\"key\":\"value\"}}", parse(bsonDocument));
     }
 
     @Test
     public void bsonDocumentStrictTest() {
         assertNotNull(bsonDocument);
-        assertEquals("{\"_id\":\"5662e5798172910f5a925a43\", \"date\":\"2015-12-05T11:26:23.184\", \"pattern\":\"\\\\d/i\", \"pattern2\":\"\\\\s\", \"long\":9223372036854775807, \"null\":null, \"double\":1.0, \"string\":\"thiago\", \"boolean\":true, \"doc\":{\"key\":\"value\"}, \"list\":[\"value\"], \"map\":{\"key\":\"value\"}}", parse(bsonDocument.toJson()));
+        assertEquals("{\"_id\":\"5662e5798172910f5a925a43\", \"date\":\"2015-12-05T13:26:23.184\", \"pattern\":\"\\\\d/i\", \"pattern2\":\"\\\\s\", \"long\":9223372036854775807, \"null\":null, \"double\":1.0, \"string\":\"thiago\", \"boolean\":true, \"doc\":{\"key\":\"value\"}, \"list\":[\"value\"], \"map\":{\"key\":\"value\"}}", parse(bsonDocument.toJson()));
     }
 
     @Test
     public void bsonDocumentShellTest() {
         assertNotNull(bsonDocument);
-        assertEquals("{\"_id\":\"5662e5798172910f5a925a43\", \"date\":\"2015-12-05T11:26:23.184\", \"pattern\":\"\\\\d/i\", \"pattern2\":\"\\\\s\", \"long\":9223372036854775807, \"null\":null, \"double\":1.0, \"string\":\"thiago\", \"boolean\":true, \"doc\":{\"key\":\"value\"}, \"list\":[\"value\"], \"map\":{\"key\":\"value\"}}", parse(bsonDocument.toJson(new JsonWriterSettings(JsonMode.SHELL))));
+        assertEquals("{\"_id\":\"5662e5798172910f5a925a43\", \"date\":\"2015-12-05T13:26:23.184\", \"pattern\":\"\\\\d/i\", \"pattern2\":\"\\\\s\", \"long\":9223372036854775807, \"null\":null, \"double\":1.0, \"string\":\"thiago\", \"boolean\":true, \"doc\":{\"key\":\"value\"}, \"list\":[\"value\"], \"map\":{\"key\":\"value\"}}", parse(bsonDocument.toJson(new JsonWriterSettings(JsonMode.SHELL))));
     }
 
     @Test
     public void documentTest() {
         assertNotNull(document);
-        assertEquals("{\"_id\":\"5662e5798172910f5a925a43\", \"date\":\"2015-12-05T11:26:23.184\", \"pattern\":\"\\\\d/i\", \"pattern2\":\"\\\\s\", \"long\":9223372036854775807, \"null\":null, \"double\":1.0, \"string\":\"thiago\", \"boolean\":true, \"doc\":{\"key\":\"value\"}, \"list\":[\"value\"], \"map\":{\"key\":\"value\"}}", parse(document));
+        assertEquals("{\"_id\":\"5662e5798172910f5a925a43\", \"date\":\"2015-12-05T13:26:23.184\", \"pattern\":\"\\\\d/i\", \"pattern2\":\"\\\\s\", \"long\":9223372036854775807, \"null\":null, \"double\":1.0, \"string\":\"thiago\", \"boolean\":true, \"doc\":{\"key\":\"value\"}, \"list\":[\"value\"], \"map\":{\"key\":\"value\"}}", parse(document));
     }
 
     @Test
     public void documentStrictTest() {
         assertNotNull(document);
-        assertEquals("{\"_id\":\"5662e5798172910f5a925a43\", \"date\":\"2015-12-05T11:26:23.184\", \"pattern\":\"\\\\d/i\", \"pattern2\":\"\\\\s\", \"long\":9223372036854775807, \"null\":null, \"double\":1.0, \"string\":\"thiago\", \"boolean\":true, \"doc\":{\"key\":\"value\"}, \"list\":[\"value\"], \"map\":{\"key\":\"value\"}}", parse(document.toJson(new JsonWriterSettings(JsonMode.STRICT))));
+        assertEquals("{\"_id\":\"5662e5798172910f5a925a43\", \"date\":\"2015-12-05T13:26:23.184\", \"pattern\":\"\\\\d/i\", \"pattern2\":\"\\\\s\", \"long\":9223372036854775807, \"null\":null, \"double\":1.0, \"string\":\"thiago\", \"boolean\":true, \"doc\":{\"key\":\"value\"}, \"list\":[\"value\"], \"map\":{\"key\":\"value\"}}", parse(document.toJson(new JsonWriterSettings(JsonMode.STRICT))));
     }
 
     @Test
     public void documentShellTest() {
         assertNotNull(document);
-        assertEquals("{\"_id\":\"5662e5798172910f5a925a43\", \"date\":\"2015-12-05T11:26:23.184\", \"pattern\":\"\\\\d/i\", \"pattern2\":\"\\\\s\", \"long\":9223372036854775807, \"null\":null, \"double\":1.0, \"string\":\"thiago\", \"boolean\":true, \"doc\":{\"key\":\"value\"}, \"list\":[\"value\"], \"map\":{\"key\":\"value\"}}", parse(document.toJson(new JsonWriterSettings(JsonMode.SHELL))));
+        assertEquals("{\"_id\":\"5662e5798172910f5a925a43\", \"date\":\"2015-12-05T13:26:23.184\", \"pattern\":\"\\\\d/i\", \"pattern2\":\"\\\\s\", \"long\":9223372036854775807, \"null\":null, \"double\":1.0, \"string\":\"thiago\", \"boolean\":true, \"doc\":{\"key\":\"value\"}, \"list\":[\"value\"], \"map\":{\"key\":\"value\"}}", parse(document.toJson(new JsonWriterSettings(JsonMode.SHELL))));
     }
 
 }
