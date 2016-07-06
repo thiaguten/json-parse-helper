@@ -28,6 +28,7 @@ import org.junit.Test;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
+import java.time.ZoneOffset;
 import java.util.*;
 import java.util.regex.Pattern;
 
@@ -79,6 +80,7 @@ public class JsonParseHelperTest {
         assertEquals("]", JsonParseHelper.JSON_ARRAY_END_TOKEN);
         assertEquals(null, JsonParseHelper.NULL);
         assertEquals(0, JsonParseHelper.INVALID_PATTERN_FLAG);
+        assertEquals(ZoneOffset.UTC, JsonParseHelper.UTC_DATE_TIME_ZONE);
     }
 
     @Test
