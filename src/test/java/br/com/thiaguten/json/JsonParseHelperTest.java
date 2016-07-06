@@ -97,6 +97,35 @@ public class JsonParseHelperTest {
 
     @Test(expected = RuntimeException.class)
     public void patternTest() {
+        assertEquals(Pattern.UNIX_LINES, JsonParseHelper.PatternFlag.D.getFlag());
+        assertEquals("d", JsonParseHelper.PatternFlag.D.getFlagAsString());
+        assertEquals(JsonParseHelper.PatternFlag.D, JsonParseHelper.PatternFlag.of(Pattern.UNIX_LINES));
+
+        assertEquals(Pattern.CASE_INSENSITIVE, JsonParseHelper.PatternFlag.I.getFlag());
+        assertEquals("i", JsonParseHelper.PatternFlag.I.getFlagAsString());
+        assertEquals(JsonParseHelper.PatternFlag.I, JsonParseHelper.PatternFlag.of(Pattern.CASE_INSENSITIVE));
+
+        assertEquals(Pattern.COMMENTS, JsonParseHelper.PatternFlag.C.getFlag());
+        assertEquals("c", JsonParseHelper.PatternFlag.C.getFlagAsString());
+        assertEquals(JsonParseHelper.PatternFlag.C, JsonParseHelper.PatternFlag.of(Pattern.COMMENTS));
+
+        assertEquals(Pattern.MULTILINE, JsonParseHelper.PatternFlag.M.getFlag());
+        assertEquals("m", JsonParseHelper.PatternFlag.M.getFlagAsString());
+        assertEquals(JsonParseHelper.PatternFlag.M, JsonParseHelper.PatternFlag.of(Pattern.MULTILINE));
+
+        assertEquals(Pattern.DOTALL, JsonParseHelper.PatternFlag.S.getFlag());
+        assertEquals("s", JsonParseHelper.PatternFlag.S.getFlagAsString());
+        assertEquals(JsonParseHelper.PatternFlag.S, JsonParseHelper.PatternFlag.of(Pattern.DOTALL));
+
+        assertEquals(Pattern.UNICODE_CASE, JsonParseHelper.PatternFlag.U.getFlag());
+        assertEquals("u", JsonParseHelper.PatternFlag.U.getFlagAsString());
+        assertEquals(JsonParseHelper.PatternFlag.U, JsonParseHelper.PatternFlag.of(Pattern.UNICODE_CASE));
+
+        assertEquals(Pattern.UNICODE_CHARACTER_CLASS, JsonParseHelper.PatternFlag.UU.getFlag());
+        assertEquals("U", JsonParseHelper.PatternFlag.UU.getFlagAsString());
+        assertEquals(JsonParseHelper.PatternFlag.UU, JsonParseHelper.PatternFlag.of(Pattern.UNICODE_CHARACTER_CLASS));
+
+        // this should throws the test expected exception
         JsonParseHelper.PatternFlag.of(JsonParseHelper.INVALID_PATTERN_FLAG);
     }
 
@@ -121,6 +150,7 @@ public class JsonParseHelperTest {
         assertEquals(notEmpty, parse(new BsonDocument(Collections.singletonList(new BsonElement("key", new BsonString("value"))))));
     }
 
+//    @Test(expected = RuntimeException.class)
     @Test
     public void parseListTest() {
         String empty = "[]";
@@ -129,6 +159,8 @@ public class JsonParseHelperTest {
         assertEquals(empty, parse(Collections.emptyList()));
         assertEquals(notEmpty, parse(Collections.singletonList("value")));
         assertEquals(notEmpty, parse(new BsonArray(Collections.singletonList(new BsonString("value")))));
+        // this should throw the test expected exception
+//        parse(new BsonArray(Collections.singletonList(new BsonBinary(notEmpty.getBytes()))));
     }
 
     @Test

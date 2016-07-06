@@ -214,23 +214,29 @@ public final class JsonParseHelper {
                     break;
                 default:
                     // NOP
+//                    throw new RuntimeException("bson type not supported yet");
             }
         } else {
             if (value instanceof ObjectId) {
                 builder.append(DOUBLE_QUOTES).append(((ObjectId) value).toHexString()).append(DOUBLE_QUOTES);
+                return;
             }
             if (value instanceof List) {
                 builder.append(parse((List) value));
+                return;
             }
             if (value instanceof Map) {
                 builder.append(parse((Map) value));
+                return;
             }
             if (value instanceof Date) {
                 Date date = (Date) value;
                 builder.append(DOUBLE_QUOTES).append(LocalDateTime.ofInstant(date.toInstant(), UTC_DATE_TIME_ZONE)).append(DOUBLE_QUOTES);
+                return;
             }
             if (value instanceof String) {
                 builder.append(DOUBLE_QUOTES).append(value).append(DOUBLE_QUOTES);
+                return;
             }
             if (value instanceof Pattern) {
                 Pattern pattern = ((Pattern) value);
@@ -239,16 +245,22 @@ public final class JsonParseHelper {
                 String consolidate = flags > INVALID_PATTERN_FLAG ? patternValue + SLASH + PatternFlag.of(flags).getFlagAsString() : patternValue;
 
                 builder.append(DOUBLE_QUOTES).append(consolidate).append(DOUBLE_QUOTES);
+                return;
             }
             if (value instanceof Number) {
                 builder.append(value);
+                return;
             }
             if (value instanceof Boolean) {
                 builder.append(value);
+                return;
             }
             if (value == null) {
                 builder.append(NULL);
+                return;
             }
+            // NOP
+//            throw new RuntimeException("object type not supported yet");
         }
     }
 
