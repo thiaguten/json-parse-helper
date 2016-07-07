@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/thiaguten/json-parse-helper.svg)](https://travis-ci.org/thiaguten/json-parse-helper)
 [![Coverage Status](https://coveralls.io/repos/github/thiaguten/json-parse-helper/badge.svg?branch=master)](https://coveralls.io/github/thiaguten/json-parse-helper?branch=master)
+[![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg?style=flat-square)](https://www.apache.org/licenses/LICENSE-2.0.html)
 
 JsonParseHelper is a utility class with parse feature for converting MongoDB BSON strict/shell mode into 'standard' JSON format useful for instance for REST services with MongoDB.
 
