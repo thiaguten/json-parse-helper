@@ -257,7 +257,6 @@ public final class JsonParseHelper {
             }
             if (value == null) {
                 builder.append(NULL);
-                return;
             }
             // NOP
 //            throw new RuntimeException("object type not supported yet");

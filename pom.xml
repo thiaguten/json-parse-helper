@@ -164,7 +164,7 @@
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <bson.version>3.2.2</bson.version>
+        <bson.version>3.3.0</bson.version>
         <junit.version>4.12</junit.version>
     </properties>
 
